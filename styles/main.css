@@ -1,0 +1,8 @@
+body {
+    min-height: 100vh;
+    max-width: 100vh;
+}
+
+svg {
+    border: 2px solid black;
+}
