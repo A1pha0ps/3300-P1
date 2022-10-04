@@ -1,8 +1,19 @@
-body {
-    min-height: 100vh;
-    max-width: 100vh;
+* {
+    font-size: 15px;
 }
 
-svg {
-    border: 2px solid black;
+g.x text {
+    font-size: 10px;
+}
+
+div#data1 {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+div#data1Legend {
+    margin-top: 2%;
+    transform: translateX(100%);
+    margin-right: 330px;
 }
