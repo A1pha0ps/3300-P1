@@ -4,7 +4,7 @@
 
     const width = svg.attr('width');
     const height = svg.attr('height');
-    const margin = { top: 50, right: 50, bottom: 50, left: 190 };
+    const margin = { top: 50, right: 50, bottom: 50, left: 250 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
 
@@ -95,6 +95,13 @@
 
         annotations.raise()
 
+        chartArea.append('rect')
+            .attr('x', 0)
+            .attr('y', 0)
+            .attr('width', 912)
+            .attr('height', 500)
+            .style('fill', 'white')
+
         let legend_data = d3.range(min_value_viewers, max_value_viewers, (max_value_viewers - min_value_viewers) / 50);
 
         console.log(legend_data)
@@ -141,6 +148,7 @@
 
                 }
             })
+            .attr("class", "numbers")
             .style("text-anchor", "end")
             .style("font-size", 10)
             .attr("x", -45)
@@ -155,10 +163,20 @@
             })
 
         cLegend.append("text")
+            .attr('class', 'title-graph')
             .text("Key (Corresponds to Avg. Viewers): ")
-            .style("font-size", 10)
+            .style("font-size", 15)
             .attr("x", 0)
             .attr("y", 10);
+
+        svg.append("text")
+            .attr('class', 'title-graph')
+            .text("Genre of Games (Top 200) vs. Time (2016-2021)")
+            .style("font-size", 20)
+            .attr("x", `${chartWidth / 2}`)
+            .attr("y", `${margin.bottom - 20}`);
+
+        chartArea.selectAll("g").raise()
     });
 })();
 

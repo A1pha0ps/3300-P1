@@ -1,5 +1,19 @@
 * {
     font-size: 15px;
+    font-family: 'Lato';
+}
+
+body {
+    margin: 0;
+    background-color: #9CBFD8;
+}
+
+div {
+    background-color: #DAEBFC;
+}
+
+.gridlines line {
+    stroke: black;
 }
 
 g.x text {
@@ -12,8 +26,42 @@ div#data1 {
     width: 80%;
 }
 
-div#data1Legend {
+div#data2 {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+div#data1Legend svg {
     margin-top: 2%;
-    transform: translateX(100%);
-    margin-right: 330px;
+    transform: translate(870px, 0px);
+    display: inline-block;
+}
+
+g#points {
+    background-color: #816CA7;
+}
+
+path.domain {
+    color: black;
+}
+
+g.tick line,
+g.tick text {
+    color: black;
+}
+
+text.title-graph {
+    fill: #08306B;
+}
+
+text.numbers {
+    fill: #0F55A6;
+}
+
+div p {
+    font-size: 24px;
+    margin: 0;
+    margin-right: 50%;
+    transform: translate(30%, -100%);
 }

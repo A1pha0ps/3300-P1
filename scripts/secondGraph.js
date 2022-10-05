@@ -1,7 +1,7 @@
 const svg = d3.select("svg#svg2");
 const width = svg.attr('width');
 const height = svg.attr('height');
-const margin = { top: 30, right: 30, bottom: 60, left: 60 };
+const margin = { top: 30, right: 30, bottom: 60, left: 120 };
 const chartWidth = width - margin.left - margin.right;
 const chartHeight = height - margin.top - margin.bottom;
 
@@ -37,7 +37,8 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
         if (d['Genre'] == 'MOBA'
             || d["Genre"] == 'Turn-based strategy (TBS)' ||
             d["Genre"] == 'Card & Board Game' ||
-            d["Genre"] == 'Adventure') {
+            d["Genre"] == 'Adventure' || d["Genre"] == 'Shooter'
+            || d["Genre"] == 'Point-and-click') {
             smallTrendData.push(d);
             genreList.push(d['Genre'])
         }
@@ -65,10 +66,6 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
     let bottomGridlines = d3.axisBottom(dateScale)
         .tickSize(-chartHeight - 10)
         .tickFormat("")
-    // annotations.append('g')
-    //     .attr('class', 'x axis')
-    //     .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
-    //     .call(bottomsubAxis);
     annotations.append("g")
         .attr("class", "x axis")
         .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
@@ -78,6 +75,10 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
         .attr("class", "x gridlines")
         .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
         .call(bottomGridlines);
+    annotations.append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(${margin.left},${chartHeight + margin.top + 10})`)
+        .call(bottomsubAxis);
 
     // Y Axis
     const viewerScale = d3.scaleLinear().domain([min_value_viewers, max_value_viewers]).range([chartHeight, 0]);
@@ -94,7 +95,7 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
         .attr("transform", `translate(${margin.left - 10},${margin.top})`)
         .call(leftGridlines);
 
-    const colorScale = d3.scaleOrdinal(d3.schemeSet2);
+    const colorScale = d3.scaleOrdinal(d3.schemeDark2);
 
     var lineGen = d3.line()
         .x(d => dateScale(d.Date))
@@ -118,4 +119,41 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
         .attr('cy', d => viewerScale(d.Avg_viewers))
         .style('fill', d => colorScale(d.Genre));
 
+    annotations.append('rect').attr('class', 'legend_box')
+        .attr('x', 120)
+        .attr('y', 30)
+        .attr('width', 210)
+        .attr('height', 200)
+        .style('fill', "white")
+        .style('opacity', 0.9)
+
+
+    // select the svg area
+    let rect_SVG = svg.select("g#annotations")
+
+    // Add one dot in the legend for each name.
+    let size = 20
+    let offset = 130
+    rect_SVG.selectAll("squares")
+        .data(smallTrendData)
+        .join("rect")
+        .attr("x", offset)
+        .attr("y", (d, i) => (60 + i * (size + 5)))
+        .attr("width", size)
+        .attr("height", size)
+        .style("fill", d => colorScale(d.Genre))
+
+    // Add one dot in the legend for each name.
+    rect_SVG.selectAll("labels")
+        .data(smallTrendData)
+        .join("text")
+        .attr("x", offset + size * 1.2)
+        .attr("y", (d, i) => (60 + i * (size + 5) + (size / 2)))
+        .style("fill", d => colorScale(d.Genre))
+        .text(d => d.Genre)
+        .attr("text-anchor", "left")
+        .style("alignment-baseline", "middle")
+
+    rect_SVG.raise()
+    chartArea.raise()
 });
