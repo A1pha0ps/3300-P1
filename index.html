@@ -2,7 +2,7 @@
 
 <head>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="styles/main.css" />
     <style>
         .gridlines .domain {
@@ -12,13 +12,24 @@
 </head>
 
 <body>
+    <header>
+        <h1><span id="title">TWITCH REWIND</span></h1>
+    </header>
     <div id="data1">
+        <h3 id="para1">
+            For the past few years, the Twitch platform has seen over hundreds of games that became
+            hot and trending. While some games have died out as a fad and some continue to dominate
+            the charts on Twitch, we show the larger picture of what types of genres the users will
+            continue to watch. The heatmap below shows the genres of the top 200 games every month
+            from 2016 to 2021.
+        </h3>
         <svg width="1200" height="600" id="svg1"></svg>
         <div id="data1Legend" width="585" height='40'>
             <svg width="300" height="100" id="svg1scale"></svg>
             <p>
-                The data above is shown in log-scale. The higher viewer count genres are
-                harder to observe. Let's see those below on a line chart!
+                While the heatmap above contrasts each Genre over time, the data above is plotted with
+                a log-scale transformation. We plot select genres below to highlight the other genres that
+                show great spikes in viewer count overtime.
             </p>
         </div>
 

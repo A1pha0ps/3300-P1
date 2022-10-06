@@ -13,18 +13,12 @@
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
     d3.json("resources/cleaned.json", d3.autotype).then((data) => {
+        data = data.filter(d => (d['Genre'] != 'nan' && d['Genre'] != 'Visual Novel'))
 
         data.forEach(d => {
             let totalViewerCount = 0
             d['Stats'].forEach(d_ => {
-                let freq = d_['freq']
-                d_['Hours_watched'] /= freq
-                d_["Hours_watched"] /= freq
-                d_["Hours_streamed"] /= freq
-                d_["Peak_channels"] /= freq
-                d_["Avg_viewers"] /= freq
                 d_["Genre"] = d.Genre
-                d_["Avg_viewer_ratio"] /= freq
                 d_['log_scale_view'] = Math.log10(d_['Avg_viewers']);
                 totalViewerCount += d_['Avg_viewers']
             })
@@ -75,7 +69,7 @@
             .attr("transform", "rotate(-65)");
 
         // Y Axis
-        const viewerScale = d3.scaleBand().domain(genreList).range([chartHeight, 0]).padding(0.01);
+        const viewerScale = d3.scaleBand().domain(genreList).range([chartHeight, 0]).padding(0.05);
         let leftAxis = d3.axisLeft(viewerScale)
         annotations.append("g")
             .attr("class", "y axis")
@@ -108,8 +102,6 @@
             .style('fill', 'white')
 
         let legend_data = d3.range(min_value_viewers, max_value_viewers, (max_value_viewers - min_value_viewers) / 50);
-
-        console.log(legend_data)
 
         let legendColorScale = d3.scaleSequential()
             .interpolator(d3.interpolateBlues)

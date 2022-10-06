@@ -9,40 +9,17 @@ let annotations = svg.append("g").attr("id", "annotations");
 let chartArea = svg.append("g").attr("id", "points")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-d3.json("resources/test.json", d3.autotype).then((data => {
-    console.log(data)
-}));
-
 d3.json("resources/cleaned.json", d3.autotype).then((data) => {
-    data.forEach(d => {
-        d['Stats'].forEach(d_ => {
-            let freq = d_['freq']
-            d_['Hours_watched'] /= freq
-            d_["Hours_watched"] /= freq
-            d_["Hours_streamed"] /= freq
-            d_["Peak_channels"] /= freq
-            d_["Avg_viewers"] /= freq
-            d_["Genre"] = d.Genre
-            d_["Avg_viewer_ratio"] /= freq
-        })
-    })
-
-    console.log(data)
+    data = data.filter(d => (d['Genre'] != 'nan' && d['Genre'] != 'Visual Novel'))
 
     let smallTrendData = []
 
     genreList = []
     data.forEach(d => {
 
-        // if (smallSet.has(d['Genre'])) {
-        //     smallTrendData.push(d)
-        // }
-
-        if (d['Genre'] == 'MOBA'
-            || d["Genre"] == 'Turn-based strategy (TBS)' ||
-            d["Genre"] == 'Card & Board Game' ||
+        if (d['Genre'] == 'MOBA' ||
             d["Genre"] == 'Adventure' || d["Genre"] == 'Shooter'
-            || d["Genre"] == 'Point-and-click') {
+            || d["Genre"] == 'Point-and-click' || d["Genre"] == 'Tactical') {
             smallTrendData.push(d);
             genreList.push(d['Genre'])
         }
@@ -55,6 +32,7 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
     let max_value_viewers = Number.MIN_VALUE
     smallTrendData.forEach(d => {
         d['Stats'].forEach(d_ => {
+            d_['Genre'] = d.Genre
             d_['Date'] = timeParser(d_['Date']);
             dates.push(d_['Date'])
             min_value_viewers = Math.min(min_value_viewers, d_['Avg_viewers'])
@@ -103,7 +81,8 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
 
     var lineGen = d3.line()
         .x(d => dateScale(d.Date))
-        .y(d => viewerScale(d.Avg_viewers));
+        .y(d => viewerScale(d.Avg_viewers))
+        .curve(d3.curveMonotoneX);
 
     let paths = chartArea.selectAll('g').data(smallTrendData).join('g')
         .attr('class', 'tags')
@@ -127,7 +106,7 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
         .attr('x', 120)
         .attr('y', 30)
         .attr('width', 210)
-        .attr('height', 200)
+        .attr('height', 180)
         .style('fill', "white")
         .style('opacity', 0.9)
 
@@ -160,4 +139,11 @@ d3.json("resources/cleaned.json", d3.autotype).then((data) => {
 
     rect_SVG.raise()
     chartArea.raise()
+
+    svg.append("text")
+        .attr('class', 'title-graph')
+        .text("Avg. Viewer Count of Genres vs. Time (2016-2021)")
+        .style("font-size", 20)
+        .attr("x", `${chartWidth / 2 - 100}`)
+        .attr("y", `${20}`);
 });

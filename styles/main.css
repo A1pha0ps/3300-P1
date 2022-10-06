@@ -1,6 +1,33 @@
 * {
     font-size: 15px;
-    font-family: 'Lato';
+    font-family: 'Roboto';
+}
+
+header {
+    background-color: #84A8B7;
+}
+
+header h1 {
+    margin: 0 auto;
+    width: 80%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    font-size: 32pt;
+}
+
+h3 {
+    margin: 0 auto;
+    padding-top: 4%;
+    padding-bottom: 3%;
+    width: 80%;
+    font-size: 14pt;
+    font-weight: 100;
+}
+
+span#title {
+    font-family: 'Roboto';
+    font-size: 32pt;
+    font-weight: 700;
 }
 
 body {
@@ -17,7 +44,7 @@ div {
 }
 
 g.x text {
-    font-size: 10px;
+    font-size: 11px;
 }
 
 div#data1 {
@@ -60,8 +87,14 @@ text.numbers {
 }
 
 div p {
-    font-size: 24px;
     margin: 0;
     margin-right: 50%;
-    transform: translate(30%, -100%);
+    transform: translate(20%, -60%);
+    font-size: 14pt;
+    font-weight: 100;
+}
+
+header {
+    margin: 0 auto;
+    width: 80%;
 }
