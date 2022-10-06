@@ -9,6 +9,10 @@ let annotations = svg.append("g").attr("id", "annotations");
 let chartArea = svg.append("g").attr("id", "points")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
+d3.json("resources/test.json", d3.autotype).then((data => {
+    console.log(data)
+}));
+
 d3.json("resources/cleaned.json", d3.autotype).then((data) => {
     data.forEach(d => {
         d['Stats'].forEach(d_ => {

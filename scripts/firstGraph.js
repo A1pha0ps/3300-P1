@@ -15,6 +15,7 @@
     d3.json("resources/cleaned.json", d3.autotype).then((data) => {
 
         data.forEach(d => {
+            let totalViewerCount = 0
             d['Stats'].forEach(d_ => {
                 let freq = d_['freq']
                 d_['Hours_watched'] /= freq
@@ -25,8 +26,12 @@
                 d_["Genre"] = d.Genre
                 d_["Avg_viewer_ratio"] /= freq
                 d_['log_scale_view'] = Math.log10(d_['Avg_viewers']);
+                totalViewerCount += d_['Avg_viewers']
             })
+            d['totalViewerCount'] = totalViewerCount
         })
+
+        data.sort((a, b) => (a['totalViewerCount'] - b['totalViewerCount']))
 
         let genreList = []
 
