@@ -175,5 +175,69 @@
 
         chartArea.selectAll("g").raise()
     });
+
+    // Annotations
+
+    // Tactical: Valorant
+    svg.append("circle")
+        .attr("cx", 890)
+        .attr("cy", 95)
+        .attr("r", 8)
+        .attr("stroke", "white")
+        .attr("stroke-width", "1px")
+        .attr("fill", "maroon");
+
+    svg.append("text")
+        .attr("x", 886)
+        .attr("y", 100)
+        .text("1")
+        .attr("fill", "white");
+
+    // Indie: Among US
+    svg.append("circle")
+        .attr("cx", 960)
+        .attr("cy", 333)
+        .attr("r", 8)
+        .attr("stroke", "white")
+        .attr("stroke-width", "1px")
+        .attr("fill", "maroon");
+
+    svg.append("text")
+        .attr("x", 956)
+        .attr("y", 338)
+        .text("2")
+        .attr("fill", "white");
+
+    // Puzzle: Phasmophobia
+    svg.append("circle")
+        .attr("cx", 960)
+        .attr("cy", 470)
+        .attr("r", 8)
+        .attr("stroke", "white")
+        .attr("stroke-width", "1px")
+        .attr("fill", "maroon");
+
+    svg.append("text")
+        .attr("x", 956)
+        .attr("y", 475)
+        .text("3")
+        .attr("fill", "white");
+
+    // Platform: Terraria
+    svg.append("circle")
+        .attr("cx", 900)
+        .attr("cy", 492)
+        .attr("r", 8)
+        .attr("stroke", "white")
+        .attr("stroke-width", "1px")
+        .attr("fill", "maroon");
+
+    svg.append("text")
+        .attr("x", 896)
+        .attr("y", 497)
+        .text("4")
+        .attr("fill", "white");
 })();
+
+
 

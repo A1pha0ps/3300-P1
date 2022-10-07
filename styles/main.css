@@ -96,6 +96,12 @@ div p {
     font-weight: 100;
 }
 
+.annotation-text {
+    transform: translate(20%, -100%);
+    font-size: 14pt;
+    font-weight: 100;
+}
+
 header {
     margin: 0 auto;
     width: 80%;
