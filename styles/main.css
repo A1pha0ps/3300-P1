@@ -3,6 +3,10 @@
     font-family: 'Roboto';
 }
 
+svg#svg1 {
+    margin-bottom: 5%;
+}
+
 header {
     background-color: #84A8B7;
 }
@@ -63,7 +67,7 @@ div#data2 {
 
 div#data1Legend svg {
     margin-top: 2%;
-    transform: translate(870px, 0px);
+    transform: translate(870px, -700px);
     display: inline-block;
 }
 
@@ -90,19 +94,38 @@ text.numbers {
 
 div p {
     margin: 0;
-    margin-right: 50%;
+    margin-right: 30%;
     transform: translate(20%, -60%);
     font-size: 14pt;
     font-weight: 100;
 }
 
 .annotation-text {
-    transform: translate(20%, -100%);
+    transform: none;
+    padding-bottom: 7%;
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-right: 15%;
+    margin-right: 0;
     font-size: 14pt;
     font-weight: 100;
+}
+
+li {
+    display: -webkit-inline-box;
 }
 
 header {
     margin: 0 auto;
     width: 80%;
+}
+
+div#annotations {
+    margin: 0 auto;
+    width: 80%;
+}
+
+span.bold-text {
+    font-weight: 800;
+    font-size: 13pt;
 }
